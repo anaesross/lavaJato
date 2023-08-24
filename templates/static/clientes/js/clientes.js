@@ -58,69 +58,9 @@ function dados_cliente(){
         email = document.getElementById('email')
         email.value = data['cliente']['email']
 
-        div_carros = document.getElementById('carros')
-
-        for(i=0; i<data['carros'].length; i++){
-            div_carros.innerHTML += "\<form action='/clientes/update_carro/" + data['carros'][i]['id'] +"' method='POST'>\
-                <div class='row'>\
-                        <div class='col-md'>\
-                            <input class='form-control' name='carro' type='text' value='" + data['carros'][i]['fields']['carro'] + "'>\
-                        </div>\
-                        <div class='col-md'>\
-                            <input class='form-control' name='placa' type='text' value='" + data['carros'][i]['fields']['placa'] + "'>\
-                        </div>\
-                        <div class='col-md'>\
-                            <input class='form-control' type='text' name='ano' value='" + data['carros'][i]['fields']['ano'] + "' >\
-                        </div>\
-                        <div class='col-md'>\
-                            <input class='btn btn-lg btn-success' type='submit'>\
-                        </div>\
-                    </form>\
-                    <div class='col-md'>\
-                        <a href='/clientes/excluir_carro/"+ data['carros'][i]['id'] +"' class='btn btn-lg btn-danger'>EXCLUIR</a>\
-                    </div>\
-                </div><br>"
-        }
+        
         
     })
 
-
-}
-
-
-function update_cliente(){
-    nome = document.getElementById('nome').value
-    sobrenome = document.getElementById('sobrenome').value
-    email = document.getElementById('email').value
-    cpf = document.getElementById('cpf').value
-    id = document.getElementById('id').value
-
-    fetch('/clientes/update_cliente/' + id, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': csrf_token,
-        },
-        body: JSON.stringify({
-            nome: nome,
-            sobrenome: sobrenome,
-            email: email,
-            cpf: cpf,
-        })
-
-    }).then(function(result){
-        return result.json()
-    }).then(function(data){
-
-        if(data['status'] == '200'){
-            nome = data['nome']
-            sobrenome = data['sobrenome']
-            email = data['email']
-            cpf = data['cpf']
-            console.log('Dados alterado com sucesso')
-        }else{
-            console.log('Ocorreu algum erro')
-        }
-
-    })
 
 }
